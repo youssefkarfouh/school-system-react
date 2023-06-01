@@ -1,0 +1,28 @@
+.input_style {
+	@include radius(0);
+	&:hover,
+	&:focus {
+		border-color: $main-color !important;
+		box-shadow: none;
+	}
+}
+
+.input_select {
+	.ant-select-selector {
+		@include radius(0);
+		&:hover,
+		&:focus {
+			border-color: $main-color !important;
+			box-shadow: none;
+		}
+	}
+}
+
+.ant-picker {
+	@include radius(0);
+	&:hover,
+	&:focus {
+		border-color: $main-color !important;
+		box-shadow: none;
+	}
+}

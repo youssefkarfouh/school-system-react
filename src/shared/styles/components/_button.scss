@@ -1,0 +1,16 @@
+.btn_style {
+	border-color: $main-color;
+	font-size: $fs-normal;
+	background-color: $main-color;
+	color: white;
+	padding: 0.3rem 2rem;
+	@include transition(all, 0.5s, ease);
+	&:hover {
+		background-color: $main-dark-color;
+		color: white;
+	}
+	&:focus {
+		box-shadow: none;
+		outline: 0;
+	}
+}

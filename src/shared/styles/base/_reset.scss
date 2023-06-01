@@ -1,0 +1,12 @@
+a {
+	text-decoration: none !important;
+    color: $black-color;
+    &:hover{
+        color: black;
+    }
+}
+
+ul{
+    list-style: none;
+    padding:0;
+}

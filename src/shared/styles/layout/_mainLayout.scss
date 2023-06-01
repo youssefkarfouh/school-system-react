@@ -1,0 +1,21 @@
+.main_layout {
+	background-color: $bg-color;
+	.main_layout_bar {
+		padding: 1rem 2rem;
+		background-color: white;
+		
+	}
+	.main_content_wrapper {
+		display: flex;
+		
+		.main_content_menu {
+			flex: 0 0 230px;
+			background-color: white;
+			padding-top: 2rem;
+		}
+		.main_content {
+            flex: 1;
+			padding: 2rem ;
+		}
+	}
+}

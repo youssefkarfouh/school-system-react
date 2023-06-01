@@ -1,0 +1,24 @@
+{
+  "students": [
+    {
+      "fname": "",
+      "lname": "",
+      "class": "Option 1",
+      "group": "Option 1",
+      "birth": "2023-05-16",
+      "sex": "1",
+      "fName": "s",
+      "lName": "s",
+      "id": 11
+    },
+    {
+      "fName": "s",
+      "lName": "s",
+      "class": "Option 1",
+      "group": "Option 1",
+      "birth": "2023-05-29",
+      "sex": "2",
+      "id": 3
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+@import './shared/styles/main';
+
+// general 
+
+body {
+    font-size: $fs-normal;
+    font-family: 'Poppins', sans-serif;;
+}
+
+.btns_form{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}

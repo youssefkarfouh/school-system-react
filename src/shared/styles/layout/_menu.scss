@@ -1,0 +1,15 @@
+.main_menu {
+	li {
+		a {
+			color: $black-color;
+            display: block;
+            padding: .5rem 1rem;
+			font-size: $fs-normal;
+            @include transition(all, 0.5s, ease);
+			&.active {
+				background-color: $main-color;
+				color: white;
+			}
+		}
+	}
+}
