@@ -17,8 +17,8 @@ export const addStudent = async (student) => {
         const response = await axios.post(API_URL, student);
         return response.data;
     } catch (error) {
-        console.error('Error adding student:', error);
-        return null;
+        return false
+       
     }
 };
 

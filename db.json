@@ -1,24 +1,22 @@
 {
   "students": [
     {
-      "fname": "",
-      "lname": "",
+      "fname": "h",
+      "lname": "hgh",
       "class": "Option 1",
       "group": "Option 1",
-      "birth": "2023-05-16",
+      "birth": "2023-06-05",
       "sex": "1",
-      "fName": "s",
-      "lName": "s",
-      "id": 11
+      "id": 9
     },
     {
-      "fName": "s",
-      "lName": "s",
+      "fname": "hjv",
+      "lname": "vg",
       "class": "Option 1",
       "group": "Option 1",
-      "birth": "2023-05-29",
-      "sex": "2",
-      "id": 3
+      "birth": "2023-06-26",
+      "sex": "1",
+      "id": 10
     }
   ]
 }
