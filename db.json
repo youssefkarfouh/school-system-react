@@ -1,8 +1,7 @@
 {
   "students": [
     {
-      "fname": "",
-      "lname": "",
+
       "class": "Option 1",
       "group": "Option 1",
       "birth": "2023-05-16",
@@ -19,6 +18,15 @@
       "birth": "2023-05-29",
       "sex": "2",
       "id": 3
+    },
+    {
+      "fName": "sdsd",
+      "lName": "sdsd",
+      "class": "Option 1",
+      "group": "Option 1",
+      "birth": "2023-06-04",
+      "sex": "1",
+      "id": 12
     }
   ]
 }

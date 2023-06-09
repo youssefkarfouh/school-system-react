@@ -15,37 +15,31 @@ function Student() {
 			title: 'First Name',
 			dataIndex: 'fName',
 			key: "fname"
-
 		},
 		{
 			title: 'Last Name',
 			dataIndex: 'lName',
 			key: "lName"
-
 		},
 		{
 			title: 'Sex',
 			dataIndex: 'sex',
 			key: "sex"
-
 		},
 		{
 			title: 'Birth',
 			dataIndex: 'birth',
 			key: "birth"
-
 		},
 		{
 			title: 'Class',
 			dataIndex: 'class',
 			key: "class"
-
 		},
 		{
 			title: 'Group',
 			dataIndex: 'group',
 			key: "group"
-
 		},
 		{
 			title: 'Action',
