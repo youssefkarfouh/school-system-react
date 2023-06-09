@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/students'; 
+const API_URL = `${import.meta.env.VITE_API_ENDPOINT}/students`; 
 
 export const fetchStudents = async () => {
     try {
@@ -17,8 +17,8 @@ export const addStudent = async (student) => {
         const response = await axios.post(API_URL, student);
         return response.data;
     } catch (error) {
-        console.error('Error adding student:', error);
-        return null;
+        return false
+       
     }
 };
 

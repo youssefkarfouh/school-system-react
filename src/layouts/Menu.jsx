@@ -15,6 +15,9 @@ function Menu() {
           <NavLink to={"/teachers"} >Enseignat</NavLink>
         </li>
         <li>
+          Lycée
+        </li>
+        <li>
           <NavLink to={"/users-managment"} >Gestion Utilisateur</NavLink>
         </li>
       </ul>

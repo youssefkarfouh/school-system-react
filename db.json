@@ -1,13 +1,51 @@
 {
   "students": [
     {
-
       "class": "Option 1",
       "group": "Option 1",
-      "birth": "2023-05-16",
-      "sex": "1",
-      "fName": "s",
-      "lName": "s",
+      "birth": "2023-06-05",
+      "genre": "1",
+      "id": 9
+    },
+    {
+      "fname": "hjv",
+      "lname": "vg",
+      "class": "Option 1",
+      "group": "Option 1",
+      "birth": "2023-06-26",
+      "genre": "1",
+      "id": 10
+    },
+    {
+      "fname": "Sebastian Estes",
+      "lname": "Chaney Stanley",
+      "class": "Option 1",
+      "group": "Option 1",
+      "birth": "2023-06-26",
+      "genre": "1",
+      "id": 11
+    }
+  ],
+  "teacher": [
+    {
+      "fname": "h",
+      "lname": "hgh",
+      "matiere": "math",
+      "genre": "1",
+      "id": 9
+    },
+    {
+      "fname": "hjv",
+      "lname": "vg",
+      "matiere": "math",
+      "genre": "1",
+      "id": 10
+    },
+    {
+      "fname": "Sebastian Estes",
+      "lname": "Chaney Stanley",
+      "matiere": "math",
+      "genre": "1",
       "id": 11
     },
     {
