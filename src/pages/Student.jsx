@@ -11,8 +11,7 @@ function Student() {
 	const [isOpen, setIsOpen] = useState(false);
 
 
-
-	const [currentStudent, setCurrentStudent] = useState({ fname: "", lname: "", class: "", group: "", birth: "", sex: "" });
+	const [currentStudent, setCurrentStudent] = useState({ fname: "", lname: "", class: "", group: "", birth: "", genre: "" });
 
 	const columns = [
 		{
@@ -28,9 +27,9 @@ function Student() {
 
 		},
 		{
-			title: 'Sex',
-			dataIndex: 'sex',
-			key: "sex"
+			title: 'Genre',
+			dataIndex: 'genre',
+			key: "genre"
 
 		},
 		{
@@ -129,7 +128,6 @@ function Student() {
 	}, []);
 
 
-
 	return (
 		<>
 			<div className="student_wrapper">
@@ -159,7 +157,7 @@ function Student() {
 		(
 			<Modal 
 			open={isOpen}
-			title="Add Student" onCancel={handleCancel} destroyOnClose={true} footer={null}>
+			title="Student Form" onCancel={handleCancel} destroyOnClose={true} footer={null}>
 
 			<div className="mt-5">
 				<Form onFinish={onFinish}>
@@ -167,6 +165,7 @@ function Student() {
 						<Input
 							className="input_style"
 							placeholder="Enter First Name"
+							
 							value={currentStudent.fname}
 							onChange={(event) => handleChange('fname', event.target.value)}
 						/>
@@ -216,12 +215,12 @@ function Student() {
 						/>
 					</Form.Item>
 
-					<Form.Item name="sex" rules={[{ required: true, message: 'Please select the sex' }]}>
+					<Form.Item name="genre" rules={[{ required: true, message: 'Please select the genre' }]}>
 						<Select
-							value={currentStudent.sex}
-							placeholder="Select sex"
+							value={currentStudent.genre}
+							placeholder="Select genre"
 							className="input_select"
-							onChange={(value) => handleChange('sex', value)}
+							onChange={(value) => handleChange('genre', value)}
 							options={[{ value: '1', label: 'Option 1' }, { value: '2', label: 'Option 2' }]}
 						/>
 					</Form.Item>
@@ -236,11 +235,6 @@ function Student() {
 		)
 		
 		}
-
-
-
-
-
 
 		</>
 	);

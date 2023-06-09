@@ -3,10 +3,12 @@
 	.main_layout_bar {
 		padding: 1rem 2rem;
 		background-color: white;
+		height: 60px;
 		
 	}
 	.main_content_wrapper {
 		display: flex;
+		height: calc(100vh - 60px) ;
 		
 		.main_content_menu {
 			flex: 0 0 230px;
