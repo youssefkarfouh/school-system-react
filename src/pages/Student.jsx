@@ -22,12 +22,12 @@ function Student() {
 		{
 			title: 'Last Name',
 			dataIndex: 'lname',
-			key: "lName"
+			key: "lname"
 		},
 		{
-			title: 'Sex',
-			dataIndex: 'sex',
-			key: "sex"
+			title: 'Genre',
+			dataIndex: 'genre',
+			key: "genre"
 		},
 		{
 			title: 'Birth',
@@ -92,10 +92,10 @@ function Student() {
 	
 		
 	}
-	// function showPreview(){
-	// 	setIsOpen(true)
-	// 	setPreview(false)
-	// }
+	function showPreview(){
+		setIsOpen(true)
+		// setPreview(false)
+	}
 	
 	async function deleteStudent(id) {
 		const data = await removeStudent(id);
