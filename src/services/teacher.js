@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = `${import.meta.env.VITE_API_ENDPOINT}/teacher`; 
+const API_URL = `${import.meta.env.VITE_API_ENDPOINT}/teachers`; 
 
 export const fetchTeachers = async () => {
     try {

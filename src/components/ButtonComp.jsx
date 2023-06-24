@@ -8,7 +8,7 @@ function ButtonComp({ type, text, click }) {
 }
 
 ButtonComp.defaultProps = {
-	type: 'button',
+	type: 'submit',
   };
   
 export default ButtonComp;

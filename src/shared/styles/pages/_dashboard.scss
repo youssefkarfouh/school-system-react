@@ -1,0 +1,26 @@
+.dashboard {
+	.cards_box {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+		gap: 1rem;
+		div {
+			background-color: white;
+			text-align: center;
+			padding: 1rem;
+			h5 {
+				font-size: $fs-h4;
+			}
+			h6 {
+				font-size: $fs-h6;
+			}
+		}
+	}
+	.charts {
+		
+		.box {
+			background-color: white;
+			padding: 1rem;
+		}
+	}
+	
+}

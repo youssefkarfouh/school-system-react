@@ -26,9 +26,17 @@
       "birth": "2023-06-12",
       "genre": "1",
       "id": 12
+    },
+    {
+      "fname": "yoyussef",
+      "lname": "karfouh",
+      "group": "Option 1",
+      "birth": "2023-06-26",
+      "genre": "1",
+      "id": 13
     }
   ],
-  "teacher": [
+  "teachers": [
     {
       "fname": "sdsd",
       "lname": "ssd",
@@ -43,16 +51,30 @@
       "id": 2
     },
     {
-      "class": "sss",
+      "class": "sdsd",
       "id": 3
+    }
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "group": "ssss",
+      "class": 1
     },
     {
-      "class": "youssef",
-      "id": 4
+      "group": "ssdds",
+      "class": 2,
+      "id": 2
+    }
+  ],
+  "subjects": [
+    {
+      "id": 1,
+      "subject": "ssss"
     },
     {
-      "class": "eee",
-      "id": 5
+      "subject": "ds",
+      "id": 2
     }
   ]
 }

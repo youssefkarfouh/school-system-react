@@ -58,7 +58,7 @@ function Login() {
 							</Form.Item>
 
 							<div className="mt-5">
-								<ButtonComp type="submit" text={'Login'} />
+								<ButtonComp text={'Login'} />
 							</div>
 						</Form>
 					</div>

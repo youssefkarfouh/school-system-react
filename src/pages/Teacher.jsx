@@ -38,7 +38,7 @@ function Teacher() {
 			key: "genre"
 
 		},
-		
+
 		{
 			title: 'Action',
 			key: "action",
@@ -46,7 +46,7 @@ function Teacher() {
 				<Space>
 					<DeleteOutlined onClick={() => deleteTeacher(record.id)} style={{ color: "red", cursor: "pointer" }} />
 					<EditOutlined onClick={() => editTeacher(record)} style={{ cursor: "pointer" }} />
-					<EyeOutlined  style={{ cursor: "pointer" }} />
+					<EyeOutlined style={{ cursor: "pointer" }} />
 				</Space>
 			),
 		},
@@ -77,13 +77,13 @@ function Teacher() {
 		console.log(teacher)
 		setCurrentTeacher(teacher)
 		setIsOpen(true)
-	
+
 	}
-	function showPreview(){
+	function showPreview() {
 		setIsOpen(true)
-		
+
 	}
-	
+
 	async function deleteTeacher(id) {
 		const data = await removeTeacher(id);
 
@@ -111,89 +111,89 @@ function Teacher() {
 
 	return (
 		<>
-			<div className="student_wrapper">
+		
 				<h4>Gestion Des Enseignants</h4>
 
 				<div className="mt-5">
-					<div className="student_filter">
+					<div className="filter_container">
 						<Form onFinish={onFinish} >
 
 							<Form.Item name="name" rules={[{ required: true, message: 'Please enter name!' }]} className='m-0'>
 								<Input className="input_style" placeholder="Name" />
 							</Form.Item>
 
-							<ButtonComp text="filter" />
 						</Form>
 					</div>
-					<div className="student_list my-5">
-						<Table columns={columns} dataSource={teachers} />
-					</div>
-					<div className="student_add">
-						<ButtonComp text="Ajouter Enseignant" click={() => setIsOpen(true)} />
-					</div>
 				</div>
-			</div>
+				<div className="student_list my-5">
+					<Table rowKey={(record) => record.id} columns={columns} dataSource={teachers} />
+				</div>
+				<div className="student_add">
+					<ButtonComp text="Ajouter Enseignant" click={() => setIsOpen(true)} />
+				</div>
+			
+	
 
-		{isOpen && 
-		(
-			<Modal 
-			open={isOpen}
-			title="Teacher Form" onCancel={handleCancel} destroyOnClose={true} footer={null}>
+			{ isOpen &&
+			(
+				<Modal
+					open={isOpen}
+					title="Teacher Form" onCancel={handleCancel} destroyOnClose={true} footer={null}>
 
-			<div className="mt-5">
-				<Form onFinish={onFinish}>
-					<Form.Item name="fname" rules={[{ required: true, message: 'Please enter the first name' }]}>
-						<Input
-							className="input_style"
-							placeholder="Enter First Name"
-							
-							value={currentTeacher.fname}
-							onChange={(event) => handleChange('fname', event.target.value)}
-						/>
-					</Form.Item>
+					<div className="mt-5">
+						<Form onFinish={onFinish}>
+							<Form.Item name="fname" rules={[{ required: true, message: 'Please enter the first name' }]}>
+								<Input
+									className="input_style"
+									placeholder="Enter First Name"
 
-					<Form.Item name="lname" rules={[{ required: true, message: 'Please enter the last name' }]}>
-						<Input
-							className="input_style"
-							placeholder="Enter Last Name"
-							value={currentTeacher.lname}
-							onChange={(event) => handleChange('lname', event.target.value)}
-						/>
-					</Form.Item>
+									value={currentTeacher.fname}
+									onChange={(event) => handleChange('fname', event.target.value)}
+								/>
+							</Form.Item>
 
-					<Form.Item name="matiere" rules={[{ required: true, message: 'Please select the subject' }]}>
-						<Select
-							placeholder="Select matiere"
-							className="input_select"
-							value={currentTeacher.class}
-							onChange={(value) => handleChange('matiere', value)}
-							options={[
-								{ value: 'math', label: 'Math' },
-								{ value: 'svt', label: 'SVT' }
-							]}
-						/>
-					</Form.Item>
+							<Form.Item name="lname" rules={[{ required: true, message: 'Please enter the last name' }]}>
+								<Input
+									className="input_style"
+									placeholder="Enter Last Name"
+									value={currentTeacher.lname}
+									onChange={(event) => handleChange('lname', event.target.value)}
+								/>
+							</Form.Item>
 
-					<Form.Item name="genre" rules={[{ required: true, message: 'Please select the sex' }]}>
-						<Select
-							value={currentTeacher.sex}
-							placeholder="Select genre"
-							className="input_select"
-							onChange={(value) => handleChange('genre', value)}
-							options={[{ value: '1', label: 'Option 1' }, { value: '2', label: 'Option 2' }]}
-						/>
-					</Form.Item>
+							<Form.Item name="matiere" rules={[{ required: true, message: 'Please select the subject' }]}>
+								<Select
+									placeholder="Select matiere"
+									className="input_select"
+									value={currentTeacher.class}
+									onChange={(value) => handleChange('matiere', value)}
+									options={[
+										{ value: 'math', label: 'Math' },
+										{ value: 'svt', label: 'SVT' }
+									]}
+								/>
+							</Form.Item>
 
-					<div className="btns_form">
-						<ButtonComp text="cancel" click={handleCancel} />
-						<ButtonComp type="submit" text="submit" />
+							<Form.Item name="genre" rules={[{ required: true, message: 'Please select the sex' }]}>
+								<Select
+									value={currentTeacher.sex}
+									placeholder="Select genre"
+									className="input_select"
+									onChange={(value) => handleChange('genre', value)}
+									options={[{ value: '1', label: 'Option 1' }, { value: '2', label: 'Option 2' }]}
+								/>
+							</Form.Item>
+
+							<div className="btns_form">
+								<ButtonComp text="cancel" click={handleCancel} />
+								<ButtonComp />
+							</div>
+						</Form>
 					</div>
-				</Form>
-			</div>
-		</Modal>
-		)
-		
-		}
+				</Modal>
+			)
+
+}
 
 		</>
 	);

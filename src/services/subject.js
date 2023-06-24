@@ -1,18 +1,18 @@
 import axios from 'axios';
 
-const API_URL = `${import.meta.env.VITE_API_ENDPOINT}/classes`; 
+const API_URL = `${import.meta.env.VITE_API_ENDPOINT}/subjects`; 
 
-export const fetchClasses = async () => {
+export const fetchSubjects = async () => {
     try {
         const response = await axios.get(API_URL);
         return response.data;
     } catch (error) {
-        console.error('Error fetching classs:', error);
+        console.error('Error fetching Subjets:', error);
         return [];
     }
 };
 
-export const addClass = async (classe) => {
+export const addSubject = async (classe) => {
     try {
         const response = await axios.post(API_URL, classe);
         return response.data;
@@ -22,17 +22,17 @@ export const addClass = async (classe) => {
     }
 };
 
-export const deleteClass = async (classId) => {
+export const deleteSubject = async (classId) => {
     try {
         const response = await axios.delete(`${API_URL}/${classId}`);
         return response.data;
     } catch (error) {
-        console.error('Error removing class:', error);
-        return error; 
+        console.error('Error removing subject:', error);
+        return error;
     }
 };
 
-export const updateClass = async (classe) => {
+export const updateSubject = async (classe) => {
     try {
         const response = await axios.put(`${API_URL}/${classe.id}`, classe);
         return response.data;

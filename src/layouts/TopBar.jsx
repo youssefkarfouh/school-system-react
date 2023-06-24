@@ -18,7 +18,7 @@ function TopBar() {
 	return (
 		<div className="top_bar">
 			<div>
-				<Link to={"/dashboard"}>
+				<Link to={'/dashboard'}>
 					<img src={`${import.meta.env.VITE_IMAGE_DIR}/logo.svg`} className="logo" alt="logo" />
 				</Link>
 			</div>

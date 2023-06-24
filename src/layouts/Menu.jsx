@@ -15,19 +15,13 @@ function Menu() {
 					<NavLink to={'/enseignants'}>Enseignants</NavLink>
 				</li>
 				<li>
-					<NavLink end to={'/lycee'}>Lycee</NavLink>
-          <ul className='ps-3'>
-              <li>
-                <NavLink to={'/lycee/class'}>Class</NavLink>
-              </li>
-              <li>
-                <NavLink to={'/lycee/matiere'}>Matiere</NavLink>
-              </li>
-              <li>
-                <NavLink to={'/lycee/group'}>Group</NavLink>
-              </li>
-             
-          </ul>
+					<NavLink to={'/class'}>Class</NavLink>
+				</li>
+        <li>
+					<NavLink to={'/group'}>Group</NavLink>
+				</li>
+				<li>
+					<NavLink to={'/subject'}>Matiere</NavLink>
 				</li>
 				<li>
 					<NavLink to={'/users'}>Gestion Utilisateur</NavLink>
