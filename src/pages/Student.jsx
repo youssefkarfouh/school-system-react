@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import ButtonComp from '../components/ButtonComp';
 import { fetchStudents, addStudent, removeStudent } from '../services/student';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
+import dayjs from 'dayjs';
 
 
 function Student() {
@@ -11,7 +12,10 @@ function Student() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
 	const [form] = Form.useForm();
-	
+
+	const data = {
+		birth: dayjs()
+	  };
 
 	const columns = [
 		{
@@ -34,7 +38,7 @@ function Student() {
 			dataIndex: 'birth',
 			key: "birth"
 		},
-		
+
 		{
 			title: 'Group',
 			dataIndex: 'group',
@@ -47,28 +51,18 @@ function Student() {
 				<Space>
 					<DeleteOutlined onClick={() => deleteStudent(record.id)} style={{ color: "red", cursor: "pointer" }} />
 					<EditOutlined onClick={() => showPreview(record)} style={{ cursor: "pointer" }} />
-					<EyeOutlined onClick={() => showPreview(record , true)} style={{ cursor: "pointer" }} />
+					<EyeOutlined onClick={() => showPreview(record, true)} style={{ cursor: "pointer" }} />
 				</Space>
 			),
 		},
 
 	];
 
-	function closeModal() {
-		setIsOpen(false)
-	}
 	async function getAllStudent() {
 		const data = await fetchStudents();
 		console.log("data", data)
 		setStudents(data);
 	};
-
-	function showPreview(studentData , isDisabled = false) {
-		form.setFieldsValue(studentData)
-		setIsDisabled(isDisabled)
-		setIsOpen(true)
-	}
-
 	async function deleteStudent(id) {
 		const data = await removeStudent(id);
 
@@ -81,14 +75,24 @@ function Student() {
 		console.log("data", data)
 
 	}
+
+	function closeModal() {
+		setIsOpen(false)
+	}
+	function showPreview(studentData, isDisabled = false) {
+		
+		form.setFieldsValue(studentData)
+		setIsDisabled(isDisabled)
+		setIsOpen(true)
+	}
 	const onFinish = (values) => {
 
 		console.log(values)
-		// addNewStudent(currentStudent)
-		// setStudents(prev => [...prev, currentStudent])
-
+		addNewStudent(values)
+		setStudents(prev => [...prev, values])
 		closeModal();
 	};
+
 
 	useEffect(() => {
 		getAllStudent();
@@ -114,7 +118,7 @@ function Student() {
 					<Table rowKey={(record) => record.id} columns={columns} dataSource={students} />
 				</div>
 				<div className="student_add">
-					<ButtonComp text="Add Etudiant" click={() => setIsOpen(true)} />
+					<ButtonComp type="button" text="Add Etudiant" click={() => setIsOpen(true)} />
 				</div>
 			</div>
 
@@ -126,7 +130,7 @@ function Student() {
 						title="Student Form" onCancel={closeModal} destroyOnClose={true} footer={null}>
 
 						<div className="mt-5">
-							<Form form={form} disabled={isDisabled} onFinish={onFinish}>
+							<Form initialValues={data} form={form} disabled={isDisabled} onFinish={onFinish}>
 								<Form.Item name="fname" rules={[{ required: true, message: 'Please enter the first name' }]}>
 									<Input
 										className="input_style"
@@ -144,37 +148,34 @@ function Student() {
 								<Form.Item name="group" rules={[{ required: true, message: 'Please select the group' }]}>
 									<Select
 										placeholder="Select group"
-										
+
 										className="input_select"
-										
+
 										options={[
-											{ value: 'Option 1', label: 'Option 1' },
-											{ value: 'Option 2', label: 'Option 2' }
+											{ value: 1, label: 'Option 1' },
+											{ value: 2, label: 'Option 2' }
 										]}
 									/>
 								</Form.Item>
 
 								<Form.Item name="birth" rules={[{ required: true, message: 'Please select the birth date' }]}>
 									<DatePicker
-
-										format={'YYYY-MM-DD'}
+									
 										style={{ width: '100%' }}
-										
 									/>
 								</Form.Item>
 
 								<Form.Item name="genre" rules={[{ required: true, message: 'Please select the genre' }]}>
 									<Select
-										
+
 										placeholder="Select genre"
 										className="input_select"
-										
-										options={[{ value: '1', label: 'Option 1' }, { value: '2', label: 'Option 2' }]}
+										options={[{ value: 1, label: 'F' }, { value: 2, label: 'M' }]}
 									/>
 								</Form.Item>
 
 								<div className="btns_form">
-									<ButtonComp text="cancel" click={closeModal} />
+									<ButtonComp type="button" text="cancel" click={closeModal} />
 									<ButtonComp text="submit" />
 								</div>
 							</Form>
