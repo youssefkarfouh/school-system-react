@@ -10,12 +10,9 @@ function Student() {
 
 	const [students, setStudents] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
-	const [isDisabled, setIsDisabled] = useState(false);
+	const [isEdited, setIsEdited] = useState(false);
 	const [form] = Form.useForm();
 
-	const data = {
-		birth: dayjs()
-	  };
 
 	const columns = [
 		{
@@ -72,27 +69,30 @@ function Student() {
 	async function addNewStudent(studentData) {
 		const data = await addStudent(studentData);
 
-		console.log("data", data)
+		console.log("data returned", data)
+		setStudents(prev => [...prev, data])
 
 	}
 
 	function closeModal() {
 		setIsOpen(false)
 	}
-	function showPreview(studentData, isDisabled = false) {
-		
-		form.setFieldsValue(studentData)
-		setIsDisabled(isDisabled)
+	function showPreview(studentData, isPreview = false) {
+		form.setFieldsValue({ ...studentData})
+		setIsEdited(isEdited)
 		setIsOpen(true)
 	}
 	const onFinish = (values) => {
 
-		console.log(values)
 		addNewStudent(values)
-		setStudents(prev => [...prev, values])
 		closeModal();
 	};
 
+	function showAdd() {
+		setIsOpen(true)
+		form.resetFields();
+		setIsEdited(false)
+	}
 
 	useEffect(() => {
 		getAllStudent();
@@ -101,7 +101,6 @@ function Student() {
 
 	return (
 		<>
-
 			<h4>Gestion Des Etudients</h4>
 
 			<div className="mt-5">
@@ -118,56 +117,38 @@ function Student() {
 					<Table rowKey={(record) => record.id} columns={columns} dataSource={students} />
 				</div>
 				<div className="student_add">
-					<ButtonComp type="button" text="Add Etudiant" click={() => setIsOpen(true)} />
+					<ButtonComp type="button" text="Add Etudiant" click={() => showAdd()} />
 				</div>
 			</div>
 
 
 			{isOpen &&
 				(
-					<Modal
-						open={isOpen}
-						title="Student Form" onCancel={closeModal} destroyOnClose={true} footer={null}>
-
+					<Modal open={true} title="Student Form" onCancel={closeModal} destroyOnClose={true} footer={null}>
 						<div className="mt-5">
-							<Form initialValues={data} form={form} disabled={isDisabled} onFinish={onFinish}>
+							<Form form={form} disabled={isEdited} onFinish={onFinish}>
 								<Form.Item name="fname" rules={[{ required: true, message: 'Please enter the first name' }]}>
-									<Input
-										className="input_style"
-										placeholder="Enter First Name"
-									/>
+									<Input className="input_style" placeholder="Enter First Name" />
 								</Form.Item>
 
 								<Form.Item name="lname" rules={[{ required: true, message: 'Please enter the last name' }]}>
-									<Input
-										className="input_style"
-										placeholder="Enter Last Name"
-									/>
+									<Input className="input_style" placeholder="Enter Last Name" />
 								</Form.Item>
 
 								<Form.Item name="group" rules={[{ required: true, message: 'Please select the group' }]}>
 									<Select
 										placeholder="Select group"
-
 										className="input_select"
-
-										options={[
-											{ value: 1, label: 'Option 1' },
-											{ value: 2, label: 'Option 2' }
-										]}
+										options={[{ value: 1, label: 'Option 1' }, { value: 2, label: 'Option 2' }]}
 									/>
 								</Form.Item>
 
 								<Form.Item name="birth" rules={[{ required: true, message: 'Please select the birth date' }]}>
-									<DatePicker
-									
-										style={{ width: '100%' }}
-									/>
+									<DatePicker format={'DD-MM-YYYY'} style={{ width: '100%' }} />
 								</Form.Item>
 
 								<Form.Item name="genre" rules={[{ required: true, message: 'Please select the genre' }]}>
 									<Select
-
 										placeholder="Select genre"
 										className="input_select"
 										options={[{ value: 1, label: 'F' }, { value: 2, label: 'M' }]}
@@ -176,7 +157,7 @@ function Student() {
 
 								<div className="btns_form">
 									<ButtonComp type="button" text="cancel" click={closeModal} />
-									<ButtonComp text="submit" />
+									{isEdited === false && <ButtonComp text="submit" />}
 								</div>
 							</Form>
 						</div>

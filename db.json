@@ -1,13 +1,103 @@
 {
   "students": [
     {
-      "fname": "w",
-      "lname": "w",
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
       "group": 1,
-      "birth": "2023-06-24T22:58:30.755Z",
-      "genre": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"F",
       "id": 1
+    },
+    {
+      "fname": "Etudiant 2",
+      "lname": "Etudiant 2",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"M",
+      "id": 2
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"M",
+      "id": 3
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"F",
+      "id": 4
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"M",
+      "id": 5
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"F",
+      "id": 6
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"F",
+      "id": 7
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"F",
+      "id": 8
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"M",
+      "id": 9
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"F",
+      "id": 10
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"F",
+      "id": 11
+    },
+    {
+      "fname": "Etudiant 1",
+      "lname": "Etudiant 1",
+      "group": 1,
+      "birth": "2023-06-26T01:13:06.289Z",
+      "genre":"F",
+      "id": 12
     }
+
+ 
   ],
   "teachers": [
     {

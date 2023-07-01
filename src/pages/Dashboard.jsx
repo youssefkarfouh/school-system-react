@@ -13,18 +13,13 @@ const options = {
 const labels = ['Filles', 'Garcons'];
 
 const pieData = {
-  labels,
+  labels ,
   datasets: [
     {
-      // label: 'Filles',
       data: [5, 9],
-      backgroundColor: ["red", "blue"]
+      backgroundColor: ["#8A70D6", "#e9e3fe"]
     },
-    // {  
-    //   label: 'Garcons',
-    //   data: [10, 15],
-    //   backgroundColor: 'rgba(53, 162, 0, 0.5)',
-    // },
+
   ],
 };
 const barData = {
@@ -109,7 +104,7 @@ function Dashboard() {
           </div>
         </div>
         <div className="row charts mt-5 justify-content-between">
-          <div className='col-md-4'>
+          <div className='col-md-5'>
             <div className='box'>
               <h6>Text</h6>
               <div>
@@ -117,7 +112,7 @@ function Dashboard() {
               </div>
             </div>
           </div>
-          <div className='col-md-8'>
+          <div className='col-md-7'>
             <div className='box'>
               <h6>Text</h6>
               <div></div>
@@ -126,8 +121,8 @@ function Dashboard() {
         </div>
         <div className="row  charts mt-5 justify-content-between">
           <div className='col-md-8'>
-            <div className='box'>
-              <h6>Text</h6>
+            <div className='box h-100'>
+              <h6>Dernies etudiants inscrits</h6>
               <div>
                 <Table rowKey={(record) => record.id} columns={columns} dataSource={students} />
               </div>
@@ -135,8 +130,8 @@ function Dashboard() {
 
           </div>
           <div className='col-md-4'>
-            <div className='box'>
-              <h6>Text</h6>
+            <div className='box h-100'>
+              <h6>Students</h6>
               <div>
                 <Pie options={options} data={pieData} />
               </div>
