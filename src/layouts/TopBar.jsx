@@ -1,7 +1,9 @@
 import React from 'react';
 import { Dropdown, Space } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
+import { IoPersonOutline , IoChevronDownSharp } from "react-icons/io5";
+
+
 
 function TopBar() {
 	const items = [
@@ -31,8 +33,10 @@ function TopBar() {
 				>
 					<a onClick={(e) => e.preventDefault()}>
 						<Space>
-							Hover me
-							<DownOutlined />
+							<IoPersonOutline />
+							Admin
+							
+							<IoChevronDownSharp />
 						</Space>
 					</a>
 				</Dropdown>

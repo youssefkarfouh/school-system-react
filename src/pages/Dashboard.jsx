@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { Chart as ChartJS, CategoryScale, LinearScale, ArcElement, BarElement, Title, Tooltip, Legend } from 'chart.js';
+import { Chart as ChartJS, CategoryScale,PointElement, LineElement , LinearScale, ArcElement, BarElement, Title, Tooltip, Legend , TimeScale,} from 'chart.js';
 import { fetchStudents} from '../services/student';
-import { Bar, Pie } from "react-chartjs-2";
+import { Bar, Pie,Line } from "react-chartjs-2";
 import { Table } from 'antd';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, TimeScale, LinearScale, BarElement,PointElement,LineElement, ArcElement, Title, Tooltip, Legend);
 
 const options = {
   responsive: true,
 };
 
+
+
+// chart labels
 const labels = ['Filles', 'Garcons'];
 
+
+// charts data
 const pieData = {
   labels ,
   datasets: [
@@ -28,12 +33,12 @@ const barData = {
     {
       label: 'Filles',
       data: [5, 9],
-      backgroundColor: "red"
+      backgroundColor: "#dfedf8"
     },
     {
       label: 'Garcons',
       data: [10, 15],
-      backgroundColor: 'rgba(53, 162, 0, 0.5)',
+      backgroundColor: '#d9f7e8',
     },
   ],
 };
@@ -75,7 +80,7 @@ function Dashboard() {
   async function getAllStudent() {
 		const data = await fetchStudents();
 		console.log("data", data)
-		setStudents(data.slice(0 ,10));
+		setStudents(data.slice(0 ,5));
 	};
   useEffect(() => {
 		getAllStudent();
@@ -86,60 +91,53 @@ function Dashboard() {
 
       <div className="mt-5 dashboard">
         <div className="cards_box">
-          <div>
+          <div style={{backgroundColor:"#dfedf8"}}>
             <h5>456</h5>
             <h6>Total Etudiants</h6>
           </div>
-          <div>
+          <div style={{backgroundColor:"#fbecd8"}}>
             <h5>456</h5>
             <h6>Total Etudiants</h6>
           </div>
-          <div>
+          <div style={{backgroundColor:"#ffe1e2"}}>
             <h5>456</h5>
             <h6>Total Etudiants</h6>
           </div>
-          <div>
+          <div style={{backgroundColor:"#d9f7e8"}}>
             <h5>456</h5>
             <h6>Total Etudiants</h6>
           </div>
         </div>
         <div className="row charts mt-5 justify-content-between">
-          <div className='col-md-5'>
+          <div className='col-md-8'>
             <div className='box'>
-              <h6>Text</h6>
+              <h6 className='mb-5'>Students</h6>
               <div>
                 <Bar options={options} data={barData} />
               </div>
             </div>
           </div>
-          <div className='col-md-7'>
-            <div className='box'>
-              <h6>Text</h6>
-              <div></div>
-            </div>
-          </div>
-        </div>
-        <div className="row  charts mt-5 justify-content-between">
-          <div className='col-md-8'>
-            <div className='box h-100'>
-              <h6>Dernies etudiants inscrits</h6>
-              <div>
-                <Table rowKey={(record) => record.id} columns={columns} dataSource={students} />
-              </div>
-            </div>
-
-          </div>
           <div className='col-md-4'>
-            <div className='box h-100'>
-              <h6>Students</h6>
+            <div className='box'>
+              <h6 className='mb-5'>Students</h6>
               <div>
                 <Pie options={options} data={pieData} />
               </div>
             </div>
           </div>
         </div>
-      </div>
+        <div className="row  charts mt-5 justify-content-between">
+          <div className='col-12'>
+            <div className='box h-100'>
+              <h6 className='mb-5'>Dernies etudiants inscrits</h6>
+              <div>
+                <Table rowKey={(record) => record.id} columns={columns} dataSource={students} />
+              </div>
+            </div>
 
+          </div>
+        </div>
+      </div>
     </>
   )
 }
