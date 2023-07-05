@@ -128,8 +128,8 @@ function Class() {
                                 </Form.Item>
 
                                 <div className="btns_form">
-                                    <ButtonComp text="cancel" click={handleCancel} />
-                                    <ButtonComp  text="submit" />
+                                    <ButtonComp text="Annuler" click={handleCancel} />
+                                    <ButtonComp  text="Ajouter" />
                                 </div>
                             </Form>
                         </div>

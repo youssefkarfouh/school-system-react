@@ -156,8 +156,8 @@ function Student() {
 								</Form.Item>
 
 								<div className="btns_form">
-									<ButtonComp type="button" text="cancel" click={closeModal} />
-									{isEdited === false && <ButtonComp text="submit" />}
+									<ButtonComp type="button" text="Annuler" click={closeModal} />
+									{isEdited === false && <ButtonComp text="Ajouter" />}
 								</div>
 							</Form>
 						</div>

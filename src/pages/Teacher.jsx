@@ -1,15 +1,18 @@
 import { DatePicker, Form, Input, Modal, Select, Space, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 import ButtonComp from '../components/ButtonComp';
-import { fetchTeachers, addTeacher, removeTeacher } from '../services/teacher';
+import { fetchTeachers, addTeacher, removeTeacher , updateTeacher } from '../services/teacher';
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
+import { IoSearch , IoDownloadOutline , IoPersonAddOutline } from "react-icons/io5";
+
 
 
 function Teacher() {
 
 	const [teachers, setTeachers] = useState([]);
 	const [isOpen, setIsOpen] = useState(false);
-	const [isEdited, setIsEdited] = useState(false);
+	const [isPreview, setIsPreview] = useState(false);
+	const [isEdit, setIsEdit] = useState(false);
 	const [form] = Form.useForm();
 
 
@@ -45,8 +48,8 @@ function Teacher() {
 			render: (_, record) => (
 				<Space>
 					<DeleteOutlined onClick={() => deleteTeacher(record.id)} style={{ color: "red", cursor: "pointer" }} />
-					<EditOutlined onClick={() => editTeacher(record)} style={{ cursor: "pointer" }} />
-					<EyeOutlined  onClick={() => showPreview(record,true)} style={{ cursor: "pointer" }} />
+					<EditOutlined onClick={() => showModal(record , false,true)} style={{ cursor: "pointer" }} />
+					<EyeOutlined onClick={() => showModal(record, true , false)} style={{ cursor: "pointer" }} />
 				</Space>
 			),
 		},
@@ -65,23 +68,14 @@ function Teacher() {
 		console.log("data", data)
 		setTeachers(data);
 	};
-	function editTeacher(teacher) {
-		console.log(teacher)
-		setCurrentTeacher(teacher)
-		setIsOpen(true)
 
-	}
-	function showPreview(teacherData, isEdited = false) {
-		form.setFieldsValue({ ...teacherData})
-		setIsEdited(isEdited)
+	function showModal(teacherData, isPreview= false , isEdit=false) {
+		if(teacherData){
+			form.setFieldsValue({ ...teacherData })
+		}
+		setIsPreview(isPreview)
+		setIsEdit(isEdit)
 		setIsOpen(true)
-	
-	}
-
-	function showAdd() {
-		setIsOpen(true);
-		form.resetFields();
-		setIsEdited(false)
 	}
 
 	async function deleteTeacher(id) {
@@ -93,12 +87,23 @@ function Teacher() {
 	async function addNewTeacher(teacherData) {
 		const data = await addTeacher(teacherData);
 		setTeachers(prev => [...prev, data])
-		console.log("data", data)
 
 	}
-	const onFinish = () => {
+	async function updateExistTeacher(teacherData) {
+		
+		// const data = await updateTeacher(teacherData);
+		
+		console.log(teacherData)
 
-		addNewTeacher(currentTeacher)
+	}
+	const onFinish = (values) => {
+
+		if(isEdit){
+			updateExistTeacher(values)
+		}
+		else{
+			addNewTeacher(values)
+		}
 		handleCancel();
 	};
 
@@ -109,28 +114,34 @@ function Teacher() {
 
 	return (
 		<>
-
 			<h4>Gestion Des Enseignants</h4>
 
 			<div className="mt-5">
-				<div className="filter_container">
+				<div className="buttons_wrapper">
+					<ButtonComp text="Exporter la liste" click={() => exportList()} >
+						<IoDownloadOutline/>
+					</ButtonComp>
+					<ButtonComp text="Ajouter Enseignant" click={() => showModal(null , false,false)} >
+				    	<IoPersonAddOutline/>
+					</ButtonComp>
+				</div>
+				<div className="filter_container my-5">
 					<Form onFinish={onFinish} >
 
 						<Form.Item name="name" rules={[{ required: true, message: 'Please enter name!' }]} className='m-0'>
 							<Input className="input_style" placeholder="Name" />
 						</Form.Item>
 
+						<button className='filter_btn'>
+							<IoSearch />
+						</button>
+
 					</Form>
 				</div>
 			</div>
-			<div className="student_list my-5">
+			<div className="student_list ">
 				<Table rowKey={(record) => record.id} columns={columns} dataSource={teachers} />
 			</div>
-			<div className="student_add">
-				<ButtonComp text="Ajouter Enseignant" click={() => showAdd()} />
-			</div>
-
-
 
 			{isOpen &&
 				(
@@ -139,7 +150,7 @@ function Teacher() {
 						title="Teacher Form" onCancel={handleCancel} destroyOnClose={true} footer={null}>
 
 						<div className="mt-5">
-							<Form form={form} disabled={isEdited} onFinish={onFinish}>
+							<Form form={form} disabled={isPreview} onFinish={onFinish}>
 								<Form.Item name="fname" rules={[{ required: true, message: 'Please enter the first name' }]}>
 									<Input
 										className="input_style"
@@ -168,17 +179,17 @@ function Teacher() {
 
 								<Form.Item name="genre" rules={[{ required: true, message: 'Please select the sex' }]}>
 									<Select
-								
+
 										placeholder="Select genre"
 										className="input_select"
-										
+
 										options={[{ value: '1', label: 'Option 1' }, { value: '2', label: 'Option 2' }]}
 									/>
 								</Form.Item>
 
 								<div className="btns_form">
-									<ButtonComp type="button" text="cancel" click={closeModal} />
-									{isEdited === false && <ButtonComp text="submit" />}
+									<ButtonComp type="button" text="Annuler" click={closeModal} />
+									{isPreview === false && <ButtonComp  text={isEdit ? "Modifier" : "Ajouter"} />}
 								</div>
 							</Form>
 						</div>

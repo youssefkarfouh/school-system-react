@@ -3,7 +3,11 @@
 	font-size: $fs-h5;
 	background-color: $main-color;
 	color: white;
-	padding: 0.3rem 2rem;
+	padding: .5rem 1.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: .5rem;
 	@include transition(all, 0.5s, ease);
 	&:hover {
 		background-color: $main-dark-color;
@@ -13,4 +17,6 @@
 		box-shadow: none;
 		outline: 0;
 	}
+
+	
 }
