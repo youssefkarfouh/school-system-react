@@ -1,135 +1,157 @@
-import { Form, Input, Modal, Space, Table } from 'antd';
+import { DatePicker, Form, Input, Modal, Popconfirm, Select, Space, Table, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import ButtonComp from '../components/ButtonComp';
-import { fetchClasses, addClass, updateClass, deleteClass } from '../services/class';
-import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
+import { fetchClasses, addClass, deleteClass, updateClass } from '../services/class';
 
+import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
+import { IoPersonAddOutline } from "react-icons/io5";
+
+import ModalConfirm from '../components/ModalConfirm';
 
 function Class() {
 
     const [classes, setClasses] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [isPreview, setIsPreview] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const [form] = Form.useForm();
 
-    const [currentClass, setCurrentclass] = useState({ class: "" })
+
 
     const columns = [
         {
             title: 'Class',
             dataIndex: 'class',
-            key: "class",
+            key: "class"
 
         },
+
         {
             title: 'Action',
             key: "action",
             render: (_, record) => (
-                <Space>
-                    <DeleteOutlined onClick={() => removeClass(record.id)} style={{ color: "red", cursor: "pointer" }} />
-                    <EditOutlined onClick={() => updateClass(record)} style={{ cursor: "pointer" }} />
-                    <EyeOutlined onClick={() => previewClass(record)} style={{ cursor: "pointer" }} />
+                <Space size={20}>
+                    <ModalConfirm handlFunc={() => removeClass(record.id)}>
+                        <DeleteOutlined style={{ color: "red", cursor: "pointer" }} />
+                    </ModalConfirm>
+
+                    <EditOutlined onClick={() => showModal(record, false, true)} style={{ cursor: "pointer" }} />
+                    <EyeOutlined onClick={() => showModal(record, true, false)} style={{ cursor: "pointer" }} />
                 </Space>
             ),
         },
-    ]
 
+    ];
+
+    // for modal 
     function handleCancel() {
         setIsOpen(false)
     }
-    function handleChange(name, value) {
+    function showModal(classData, isPreview = false, isEdit = false) {
 
-        setCurrentclass((prevData) => {
-            return {
-                ...prevData,
-                [name]: value
-            };
+        console.log("classData", classData)
+        if (classData) {
+            form.resetFields();
+        }
+
+        form.setFieldsValue({
+            id: classData ? classData.id : null,
+            class: classData ? classData.class : null,
+
         });
 
-        console.log(currentClass)
-    };
+        setIsPreview(isPreview)
+        setIsEdit(isEdit)
+        setIsOpen(true)
+    }
+    // for API calls 
     async function getAllClasses() {
         const data = await fetchClasses();
-        console.log("data", data)
         setClasses(data);
     };
-    function updateClass(classe) {
-
-        setCurrentclass(classe)
-        setIsOpen(true)
-
-
-    }
-    function previewClass(classe) {
-        setIsOpen(true)
-        // setPreview(false)
-    }
     async function removeClass(id) {
         const data = await deleteClass(id);
 
         setClasses(prev => prev.filter(ele => ele.id !== id))
 
+        message.success('Enregistrement supprimé avec succès')
     }
-    async function addNewclass(classData) {
-        const data = await addClass(classData);
+    async function addNewClass(studentData) {
+        const data = await addClass(studentData);
+        setClasses(prev => [data, ...prev])
 
-        console.log("data", data)
+        message.success('Enregistrement ajouté avec succès')
+    }
+    async function updateExistClass(studentData) {
+
+        const data = await updateClass(studentData);
+
+        getAllClasses()
+
+        message.success('Enregistrement modifé avec succès')
 
     }
-    const onFinish = () => {
 
-        addNewclass(currentClass)
-        setClasses(prev => [...prev, currentClass])
+
+
+    const onFinish = (values) => {
+
+        if (isEdit) {
+            updateExistClass(values)
+        }
+        else {
+            addNewClass(values)
+        }
         handleCancel();
     };
+
 
     useEffect(() => {
         getAllClasses();
     }, []);
 
+
     return (
-
         <>
-         
-                <h4>Gestion Des Classes</h4>
 
-                <div className="mt-5">
-                    <div className="filter_container">
-                        <Form onFinish={onFinish} >
+            <h4>Gestion Des Classes</h4>
 
-                            <Form.Item name="name" rules={[{ required: true, message: 'Please enter name!' }]} className='m-0'>
-                                <Input className="input_style" placeholder="Name" />
-                            </Form.Item>
+            <div className="my-5">
+                <div className="buttons_wrapper">
 
-                        </Form>
-                    </div>
-                    <div className="my-3">
-                        <Table rowKey={(record) => record.id} columns={columns} dataSource={classes} />
-                    </div>
-                    <div className="class_add">
-                        <ButtonComp text="Add class" click={() => setIsOpen(true)} />
-                    </div>
+                    <ButtonComp text="Ajouter Class" click={() => showModal(null, false, false)} >
+                        <IoPersonAddOutline />
+                    </ButtonComp>
                 </div>
-        
+
+            </div>
+            <div >
+                <Table rowKey={(record) => record.id} columns={columns} dataSource={classes} />
+            </div>
 
             {isOpen &&
                 (
                     <Modal
                         open={isOpen}
-                        title="class Form" onCancel={handleCancel} destroyOnClose={true} footer={null}>
+                        title="Form" onCancel={handleCancel} destroyOnClose={true} footer={null}>
 
                         <div className="mt-5">
-                            <Form onFinish={onFinish}>
-                                <Form.Item name="class" rules={[{ required: true, message: 'Please enter the first name' }]}>
+                            <Form form={form} disabled={isPreview} onFinish={onFinish}>
+
+                                <Form.Item name="id" initialValue={form.getFieldValue('id')} style={{ display: 'none' }}>
+                                    <Input type="hidden" />
+                                </Form.Item>
+
+                                <Form.Item name="class" rules={[{ required: true, message: 'required' }]}>
                                     <Input
                                         className="input_style"
-                                        placeholder="Enter class name"
-                                        value={currentClass.class}
-                                        onChange={(event) => handleChange('class', event.target.value)}
+                                        placeholder="Class"
                                     />
                                 </Form.Item>
 
                                 <div className="btns_form">
-                                    <ButtonComp text="Annuler" click={handleCancel} />
-                                    <ButtonComp  text="Ajouter" />
+                                    <ButtonComp type="button" text="Annuler" click={handleCancel} />
+                                    {isPreview === false && <ButtonComp text={isEdit ? "Modifier" : "Ajouter"} />}
                                 </div>
                             </Form>
                         </div>
@@ -137,6 +159,7 @@ function Class() {
                 )
 
             }
+
         </>
     );
 }

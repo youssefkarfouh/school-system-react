@@ -37,7 +37,7 @@ export const updateTeacher = async (teacher) => {
         const response = await axios.put(`${API_URL}/${teacher.id}`, teacher);
         return response.data;
     } catch (error) {
-        console.error('Error removing Teacher:', error);
+        console.error('Error updating Teacher:', error);
         return null;
     }
 };

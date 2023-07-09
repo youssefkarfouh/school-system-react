@@ -32,6 +32,17 @@ export const deleteGroup = async (classId) => {
     }
 };
 
+export const getGroupesByClassId = async (idClass) => {
+    try {
+
+        // GET /posts?title=json-server&author=typicode
+        const response = await axios.put(`${API_URL}/${classe.id}`, classe);
+        return response.data;
+    } catch (error) {
+        console.error('Error update group:', error);
+        return error;
+    }
+};
 export const updateGroup = async (classe) => {
     try {
         const response = await axios.put(`${API_URL}/${classe.id}`, classe);

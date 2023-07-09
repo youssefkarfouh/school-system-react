@@ -1,7 +1,7 @@
 .main_layout {
 	background-color: $bg-color;
 	.main_layout_bar {
-		padding: 1rem 2rem;
+		padding: 1rem 1.5rem;
 		background-color: white;
 		height: 60px;
 		
@@ -9,6 +9,7 @@
 	}
 	.main_content_wrapper {
 		display: flex;
+		min-height: 100vh;
 		
 		
 		.main_content_menu {

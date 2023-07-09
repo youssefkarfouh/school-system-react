@@ -1,129 +1,168 @@
-import { Form, Input, Modal, Space, Table } from 'antd';
+import { Form, Input, Modal, Popconfirm, Select, Space, Table, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import ButtonComp from '../components/ButtonComp';
-import { fetchSubjects, addSubject, updateSubject, deleteSubject } from '../services/subject';
+import { fetchSubjects, addSubject, deleteSubject, updateSubject } from '../services/subject';
+
 import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons'
+import { IoPersonAddOutline } from "react-icons/io5";
+
+import ModalConfirm from '../components/ModalConfirm';
 
 
 function Subject() {
 
+
     const [subjects, setSubjects] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
+    const [isPreview, setIsPreview] = useState(false);
+    const [isEdit, setIsEdit] = useState(false);
+    const [form] = Form.useForm();
 
-    const [currentSubject, setCurrentSubject] = useState({ subject: "", })
 
     const columns = [
         {
-            title: 'Subject',
+            title: 'Matière',
             dataIndex: 'subject',
-            key: "subject",
-
-            filterMode: 'tree',
-            filterSearch: true,
-            onFilter: (value, record) => record.name.startsWith(value),
+            key: "subject"
 
         },
+
         {
             title: 'Action',
             key: "action",
             render: (_, record) => (
-                <Space>
-                    <DeleteOutlined onClick={() => removeSubject(record.id)} style={{ color: "red", cursor: "pointer" }} />
-                    <EditOutlined onClick={() => updateSubject(record)} style={{ cursor: "pointer" }} />
-                    <EyeOutlined onClick={() => previewSubject(record)} style={{ cursor: "pointer" }} />
+                <Space size={20}>
+                    <ModalConfirm handlFunc={() => removeSubject(record.id)}>
+                        <DeleteOutlined style={{ color: "red", cursor: "pointer" }} />
+                    </ModalConfirm>
+
+                    <EditOutlined onClick={() => showModal(record, false, true)} style={{ cursor: "pointer" }} />
+                    <EyeOutlined onClick={() => showModal(record, true, false)} style={{ cursor: "pointer" }} />
                 </Space>
             ),
         },
-    ]
 
+    ];
+
+    // for modal 
     function handleCancel() {
         setIsOpen(false)
     }
-    function handleChange(name, value) {
+    function showModal(subjectData, isPreview = false, isEdit = false) {
 
-        setCurrentSubject((prevData) => {
-            return {
-                ...prevData,
-                [name]: value
-            };
+        if (subjectData) {
+            form.resetFields();
+        }
+
+        form.setFieldsValue({
+            id: subjectData ? subjectData.id : null,
+            subject: subjectData ? subjectData.subject : null,
+
+
         });
 
-        console.log(currentSubject)
-    };
-    async function getAllsubjects() {
+        setIsPreview(isPreview)
+        setIsEdit(isEdit)
+        setIsOpen(true)
+    }
+    // for API calls 
+    async function getAllSubjects() {
         const data = await fetchSubjects();
-        console.log("data", data)
         setSubjects(data);
     };
-    function updateSubject(Subject) {
-
-        setCurrentSubject(Subject)
-        setIsOpen(true)
-
-    }
-    function previewSubject(Subject) {
-        setIsOpen(true)
-    }
     async function removeSubject(id) {
-        const data = await deleteSubject(id);
+        const data = await deleteGroup(id);
 
         setSubjects(prev => prev.filter(ele => ele.id !== id))
 
+        message.success('Enregistrement supprimé avec succès')
     }
-    async function addNewSubject(subject) {
-        const data = await addSubject(subject);
+    async function addNewSubject(groupData) {
+        const data = await addSubject(groupData);
+        setSubjects(prev => [data, ...prev])
 
-        console.log("data", data)
+        message.success('Enregistrement ajouté avec succès')
+    }
+    async function updateExistSubject(groupData) {
+
+        const data = await updateSubject(groupData);
+
+        getAllSubjects()
+
+
+        message.success('Enregistrement modifé avec succès')
 
     }
-    const onFinish = () => {
+    async function getAllSubjects() {
 
-        addNewSubject(currentSubject)
-        setSubjects(prev => [...prev, currentSubject])
+        const dataSubjects = await fetchSubjects();
+
+        setSubjects(dataSubjects)
+
+    }
+
+
+    // for submit data
+
+    const onFinish = (values) => {
+
+        if (isEdit) {
+            updateExistSubject(values)
+        }
+        else {
+            addNewSubject(values)
+        }
         handleCancel();
     };
 
+
     useEffect(() => {
-        getAllsubjects();
+        getAllSubjects();
     }, []);
 
-    return (
 
+    return (
         <>
 
-            <h4>Gestion Des Matièrs</h4>
+            <h4>Gestion Des Matières</h4>
 
-            <div className="mt-5">
-                <div className="class_list my-5">
-                    <Table rowKey={(record) => record.id} columns={columns} dataSource={subjects} />
+            <div className="my-5">
+                <div className="buttons_wrapper">
+
+                    <ButtonComp text="Ajouter Matière" click={() => showModal(null, false, false)} >
+                        <IoPersonAddOutline />
+                    </ButtonComp>
                 </div>
-                <div className="class_add">
-                    <ButtonComp text="Add Subject" click={() => setIsOpen(true)} />
-                </div>
+
             </div>
-
+            <div >
+                <Table rowKey={(record) => record.id} columns={columns} dataSource={subjects} />
+            </div>
 
             {isOpen &&
                 (
                     <Modal
                         open={isOpen}
-                        title="Ajouter matière" onCancel={handleCancel} destroyOnClose={true} footer={null}>
+                        title="Form" onCancel={handleCancel} destroyOnClose={true} footer={null}>
 
                         <div className="mt-5">
-                            <Form onFinish={onFinish}>
-                                <Form.Item name="subject" rules={[{ required: true, message: 'Please enter Subject name' }]}>
+                            <Form form={form} disabled={isPreview} onFinish={onFinish}>
+
+                                <Form.Item name="id" initialValue={form.getFieldValue('id')} style={{ display: 'none' }}>
+                                    <Input type="hidden" />
+                                </Form.Item>
+
+                                <Form.Item name="subject" rules={[{ required: true, message: 'required' }]}>
                                     <Input
                                         className="input_style"
-                                        placeholder="Enter subject name"
-                                        value={currentSubject.subject}
-                                        onChange={(event) => handleChange('subject', event.target.value)}
+                                        placeholder="Group"
                                     />
                                 </Form.Item>
 
 
                                 <div className="btns_form">
-                                    <ButtonComp text="Annuler" click={handleCancel} />
-                                    <ButtonComp text="Ajouter" />
+                                    <ButtonComp type="button" text="Annuler" click={handleCancel} />
+                                    {isPreview === false && <ButtonComp text={isEdit ? "Modifier" : "Ajouter"} />}
                                 </div>
                             </Form>
                         </div>
@@ -131,6 +170,7 @@ function Subject() {
                 )
 
             }
+
         </>
     );
 }

@@ -1,176 +1,111 @@
 {
   "students": [
     {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "F",
-      "id": 1
-    },
-    {
-      "fname": "Etudiant 2",
-      "lname": "Etudiant 2",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
+      "id": 1,
+      "fname": "aymane",
+      "lname": "farik",
+      "class": 1,
+      "group": "5eme (G1)",
       "genre": "M",
-      "id": 2
+      "birth": "1999-07-15T06:40:26.730Z"
     },
     {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
+      "id": 2,
+      "fname": "dd",
+      "lname": "dd",
+      "class": 1,
+      "group": "5eme (G2)",
       "genre": "M",
-      "id": 3
+      "birth": "1998-08-25T06:41:33.262Z"
     },
     {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
+      "id": 3,
+      "fname": "ahmed",
+      "lname": "moutaki",
+      "class": 3,
       "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "F",
-      "id": 4
-    },
-    {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
       "genre": "M",
-      "id": 5
-    },
-    {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "F",
-      "id": 6
-    },
-    {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "F",
-      "id": 7
-    },
-    {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "F",
-      "id": 8
-    },
-    {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "M",
-      "id": 9
-    },
-    {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "F",
-      "id": 10
-    },
-    {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "F",
-      "id": 11
-    },
-    {
-      "fname": "Etudiant 1",
-      "lname": "Etudiant 1",
-      "group": 1,
-      "birth": "2023-06-26T01:13:06.289Z",
-      "genre": "F",
-      "id": 12
+      "birth": "2023-07-04T05:54:11.910Z"
     }
   ],
   "teachers": [
     {
-      "fname": "ayoumasddd",
-      "lname": "Smaykaaa",
-      "matiere": "math",
-      "genre": "1",
-      "id": 2
+      "id": 2,
+      "fname": "dd",
+      "lname": "ddd",
+      "matiere": 2,
+      "genre": "F"
     },
     {
-      "fname": "zze",
-      "lname": "zeze",
-      "matiere": "math",
-      "genre": "1",
-      "id": 3
+      "id": 3,
+      "fname": "d",
+      "lname": "d",
+      "matiere": 2,
+      "genre": "F"
     },
     {
-      "fname": "ze",
-      "lname": "ze",
-      "matiere": "math",
-      "genre": "1",
-      "id": 4
+      "id": 4,
+      "fname": "ss",
+      "lname": "ss",
+      "matiere": 3,
+      "genre": "F"
     },
     {
-      "fname": "sdd",
-      "lname": "dddd",
-      "matiere": "math",
-      "genre": "1",
-      "id": 5
-    },
-    {
-      "fname": "ayoumasddd",
-      "lname": "Smaykaaa",
-      "matiere": "math",
-      "genre": "1",
-      "id": 6
-    },
-    {
-      "fname": "sdd",
-      "lname": "hhhhhhhh",
-      "matiere": "svt",
-      "genre": "1",
-      "id": 7
+      "id": 5,
+      "fname": "dd",
+      "lname": "dd",
+      "matiere": 4,
+      "genre": "M"
     }
   ],
   "classes": [
     {
-      "class": "ssss",
-      "id": 2
+      "id": 1,
+      "class": "5 eme"
     },
     {
-      "class": "sdsd",
-      "id": 3
+      "id": 2,
+      "class": "6 eme"
+    },
+    {
+      "id": 3,
+      "class": "Bac"
     }
   ],
   "groups": [
     {
       "id": 1,
-      "group": "ssss",
-      "class": 1
-    },
-    {
-      "group": "ssdds",
-      "class": 2,
-      "id": 2
+      "group": "Bac G1",
+      "class": 3
     }
   ],
   "subjects": [
     {
       "id": 1,
-      "subject": "ssss"
+      "subject": "Arabe"
     },
     {
-      "subject": "ds",
-      "id": 2
+      "id": 2,
+      "subject": "Svt"
+    },
+    {
+      "id": 3,
+      "subject": "Français"
+    },
+    {
+      "id": 4,
+      "subject": "Islamique"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "fname": "youssef",
+      "lname": "karfouh",
+      "email": "ssss",
+      "password": "123",
+      "role": "student",
+      "status": true
     }
   ]
 }
